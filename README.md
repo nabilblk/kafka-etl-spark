@@ -1,9 +1,10 @@
 ## Description : 
 
-The idea behind this repository is to test the ability to Kafka and Kafka connect to build complex realtime ETL .
+The idea behind this repository is to test the ability to Kafka and Kafka connect to build **complex realtime ETL** .
 
-We will test different ETL ingesting data from differents type source : 
-* Simple Table : 
+We will test differents **ETL real time Ingesting process** data from differents type source :
+ 
+* **Simple Table** : 
     * An Audit Log Table for example. 
         * Import data based on Primary key 
         * Import data based on timestamp Field
@@ -15,6 +16,12 @@ We will test different ETL ingesting data from differents type source :
 We will use Jhipster Demo App and Gatling for simulating load . 
  
 All materials will be in docker . 
+
+**_We will test also Differents Kafka configuration :_**
+
+* Simple One (Single Node)
+* HA deployement mode (Cluster)
+
 
 ## Start Zookeeper : 
 
