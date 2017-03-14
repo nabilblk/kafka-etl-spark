@@ -75,13 +75,13 @@ https://github.com/sheepkiller/kafka-manager-docker
 https://github.com/yahoo/kafka-manager
 
 ```
-docker run -it --rm  --net=host --name=kafka-manager -p 9000:9000 -e ZK_HOSTS="$(docker-machine ip confluent):2181" -e APPLICATION_SECRET=letmein sheepkiller/kafka-manager
+docker run -it --rm  --net=host --name=kafka-manager -p 9000:9000 -e ZK_HOSTS="localhost:32181" -e APPLICATION_SECRET=letmein sheepkiller/kafka-manager
 ```
 
 Open Kafka Manager : 
 
 ```
-open http://$(docker-machine ip confluent):9000
+open http://$(docker-machine ip event-store):9000
 ```
 
 ## Create Topic : quickstart-avro-offsets
@@ -130,6 +130,8 @@ docker run \
    kafka-topics --describe --zookeeper localhost:32181
 ```
 
+
+
 ```
 export CONNECT_HOST=$(docker-machine ip event-store)
 ```
@@ -148,9 +150,16 @@ curl -X POST   -H "Content-Type: application/json" \
   http://$CONNECT_HOST:28083/connectors
 ```
 
-
+```
 docker run \
 --net=host \
 --rm \
 confluentinc/cp-schema-registry:3.0.0 \
 kafka-avro-console-consumer --bootstrap-server localhost:29092 --topic quickstart-jdbc-footest --new-consumer --from-beginning --max-messages 100000
+```
+
+
+
+##  GET THE INSPIRATION : 
+* http://docs.confluent.io/3.0.1/cp-docker-images/docs/tutorials/connect-avro-jdbc.html
+* https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/

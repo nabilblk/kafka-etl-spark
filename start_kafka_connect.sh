@@ -36,7 +36,6 @@ echo "Create Topic uickstart-avro-data"
 echo "Create Tmp Folder"
 
 mkdir -p ./tmp/quickstart/jars
-mkdir -p ./tmp/quickstart/files
 
 echo "Download Mysql JDBC Driver"
 
