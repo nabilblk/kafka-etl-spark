@@ -1,0 +1,131 @@
+{
+	"variables": [],
+	"info": {
+		"name": "KAFKA CONNECT API ",
+		"_postman_id": "e5f00bac-3e75-65b5-5479-634351d474a7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validation CONFIG",
+			"request": {
+				"url": "http://192.168.99.100:28083/connector-plugins/io.confluent.connect.jdbc.JdbcSourceConnector/config/validate/",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\":\"quickstart-jdbc-source-foo\",\n  \"connector.class\": \"io.confluent.connect.jdbc.JdbcSourceConnector\",\n  \"tasks.max\": 1,\n  \"connection.url\": \"jdbc:mysql://localhost:3306/connect_test?user=confluent&password=confluent\",\n  \"mode\": \"incrementing\",\n  \"incrementing.column.name\": \"id\",\n  \"timestamp.column.name\": \"modified\",\n  \"topic.prefix\": \"quickstart-jdbc-foo\",\n  \"poll.interval.ms\": 1000,\n  \"table.whitelist\":\"test\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "SHOW LIST PLUGINS",
+			"request": {
+				"url": "http://192.168.99.100:28083/connector-plugins/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"connector.class\": \"org.apache.kafka.connect.file.FileStreamSinkConnector\",\n    \"tasks.max\": \"1\",\n    \"topics\": \"test-topic\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET CONNECTOR",
+			"request": {
+				"url": "http://192.168.99.100:28083/connectors",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"connector.class\": \"org.apache.kafka.connect.file.FileStreamSinkConnector\",\n    \"tasks.max\": \"1\",\n    \"topics\": \"test-topic\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET INFO CONNECTOR",
+			"request": {
+				"url": "http://192.168.99.100:28083/connectors/hdfs-sink-connector",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"connector.class\": \"org.apache.kafka.connect.file.FileStreamSinkConnector\",\n    \"tasks.max\": \"1\",\n    \"topics\": \"test-topic\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Config",
+			"request": {
+				"url": "http://192.168.99.100:28083/connectors",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\":\"quickstart-jdbc-source-foo\",\n  \"config\":{\n  \"connector.class\": \"io.confluent.connect.jdbc.JdbcSourceConnector\",\n  \"tasks.max\": 1,\n  \"connection.url\": \"jdbc:mysql://localhost:3306/connect_test?user=confluent&password=confluent\",\n  \"mode\": \"incrementing\",\n  \"incrementing.column.name\": \"id\",\n  \"timestamp.column.name\": \"modified\",\n  \"topic.prefix\": \"quickstart-jdbc-foo\",\n  \"poll.interval.ms\": 1000\n  }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET STATUS CONNECTOR",
+			"request": {
+				"url": "http://192.168.99.100:28083/connectors/quickstart-jdbc-source-foo/status",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"connector.class\": \"org.apache.kafka.connect.file.FileStreamSinkConnector\",\n    \"tasks.max\": \"1\",\n    \"topics\": \"test-topic\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

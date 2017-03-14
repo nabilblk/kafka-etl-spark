@@ -23,6 +23,17 @@ All materials will be in docker .
 * HA deployement mode (Cluster)
 
 
+## Prepare Docker Materials : 
+```
+docker-machine rm event-store
+docker-machine create event-store --driver virtualbox --virtualbox-memory "11000" 
+eval "$(docker-machine env event-store)"
+
+```
+
+## Links
+open http://$(docker-machine ip event-store):9000 
+
 ## Start Zookeeper : 
 
 ```
@@ -118,3 +129,28 @@ docker run \
    confluentinc/cp-kafka:3.0.0 \
    kafka-topics --describe --zookeeper localhost:32181
 ```
+
+```
+export CONNECT_HOST=$(docker-machine ip event-store)
+```
+```
+curl -X POST   -H "Content-Type: application/json" \
+  --data '{ "name": "quickstart-jdbc-source-foo", \
+  "config": { \
+  "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector", \
+  "tasks.max": 1, \
+  "connection.url": "jdbc:mysql://localhost:3306/connect_test?user=confluent&password=confluent", \
+  "mode": "incrementing", \
+  "incrementing.column.name": "id", \
+  "timestamp.column.name": "modified", \
+  "topic.prefix": "quickstart-jdbc-foo", \
+  "poll.interval.ms": 1000 } }'   \
+  http://$CONNECT_HOST:28083/connectors
+```
+
+
+docker run \
+--net=host \
+--rm \
+confluentinc/cp-schema-registry:3.0.0 \
+kafka-avro-console-consumer --bootstrap-server localhost:29092 --topic quickstart-jdbc-footest --new-consumer --from-beginning --max-messages 100000
